@@ -11,8 +11,8 @@ kdb::connect();
 include('user.php');
 $user = new kuser;
 
- include('./modules/entry/entry.php');
-// include('./module/discount.php');
+include('./modules/entry/entry.php');
+include('./modules/about/about.php');
 // include('./module/flash.php');
 // include('./module/lens.php');
 // include('./module/memory.php');

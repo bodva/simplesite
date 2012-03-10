@@ -6,6 +6,10 @@ if ($user->islogin()) {
 	$id = 0;
 	$adminmenu['$id']['mod'] = 'entry';
 	$adminmenu['$id']['name'] = 'Entrys';
+	$id = 1;
+	$adminmenu['$id']['mod'] = 'about';
+	$adminmenu['$id']['name'] = 'About';
+
 	?>
 	<div>
 		<a href="?act=admin">Admin main</a>
