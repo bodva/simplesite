@@ -34,6 +34,10 @@ if ($user->islogin()) {
 		$mod = $_REQUEST['mod'];
 		if (empty($_GET['id'])){
 			$obj = new $mod;
+			if (!empty($_REQUEST['del'])) {
+				$del = (int)$_REQUEST['del'];
+				$obj->delete($del);
+			}			
 			$entrys = $obj->admintable();
 			?>
 			<div>
@@ -45,7 +49,7 @@ if ($user->islogin()) {
 				core::debug($entry);
 				?>
 				<div>
-					<a href="?act=admin&mod=<?php echo $mod; ?>&id=<?php echo $entry['id']; ?>"><?php echo $entry['title']; ?></a>
+					<a href="?act=admin&mod=<?php echo $mod; ?>&id=<?php echo $entry['id']; ?>"><?php echo $entry['title']; ?></a>[<a href="?act=admin&mod=<?php echo $mod; ?>&del=<?php echo $entry['id']; ?>">x</a>]
 				</div>
 				<?php
 				//core::debug($mod::getEntrys());
