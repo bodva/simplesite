@@ -1,6 +1,14 @@
 <?php if (!defined('defSimpleSite')) {die("Use site core!");}  ?>
-<h2>Page about me</h2>
-<div>email (jabber): dmitry@thebodva.com</div>
-<div>skype: bodva00x</div>
-<div>vk: vk.com/bodva</div>
-<div>fb: facebook.com/bodva</div>
+<?php  
+$objs = about::getEntrys(); 
+?>
+<h2>About page</h2>
+<?php
+foreach ($objs as $entry) {
+	?>
+	<div class="single-post">
+				<?php echo $entry->title; ?>: <?php echo $entry->content; ?>
+		<div class="separator"></div>
+	</div>
+	<?php
+} ?>
