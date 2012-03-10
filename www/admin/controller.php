@@ -4,12 +4,12 @@ core::debug($_REQUEST);
 if ($user->islogin()) {
 	$adminmenu = array();
 	$id = 0;
-	$adminmenu['$id']['mod'] = 'entry';
-	$adminmenu['$id']['name'] = 'Entrys';
+	$adminmenu[$id]['mod'] = 'entry';
+	$adminmenu[$id]['name'] = 'Entrys';
 	$id = 1;
-	$adminmenu['$id']['mod'] = 'about';
-	$adminmenu['$id']['name'] = 'About';
-
+	$adminmenu[$id]['mod'] = 'about';
+	$adminmenu[$id]['name'] = 'About';
+	core::debug($adminmenu);
 	?>
 	<div>
 		<a href="?act=admin">Admin main</a>
@@ -25,7 +25,7 @@ if ($user->islogin()) {
 				 	echo '<a href="?act=admin&mod='.$v['mod'].'">'.$v['name'].'</a>';
 				 	echo '</div>';
 				 	echo '<div id="separator" class="seperator"></div>';
-				 } 
+				} 
 			?>
 		</div>
 	<?php
