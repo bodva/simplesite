@@ -12,6 +12,7 @@ div {
 	width:60%;
 	position: absolute;	
 	margin-left: 20%;
+	font-family: monospace;
 }
 .login{
 	text-align:center;
