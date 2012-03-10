@@ -1,13 +1,13 @@
 <?php if (!defined('defSimpleSite')) {die("Use site core!");}  ?>
 <?php // core::debug(entry::getEntrys()); ?>
 <?php  
-$objs = entry::getEntrys(); 
-foreach ($objs as $entry) {
+//$objs = entry::getEntrys(); 
+//foreach ($objs as $entry) {
 	?>
 	<div class="single-post">
 		<div class="title">
 			<div class="date" title="<?php echo date("Y-d-m H:i:s",$entry->title); ?>">
-				<a href="?id=<?php echo $entry->id; ?>"><?php echo $entry->title; ?></a>
+				<?php echo $entry->title; ?>
 			</div>					
 		</div>
 		<div class="content">
@@ -16,4 +16,4 @@ foreach ($objs as $entry) {
 		<div class="separator"></div>
 	</div>
 	<?php
-} ?>
+//} ?>

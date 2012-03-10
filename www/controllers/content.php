@@ -22,6 +22,15 @@ if (!empty($_REQUEST['act'])) {
 			include '/template/index.php';
 			break;
 	}
+} elseif (!empty($_REQUEST['id'])) {
+		$id = (int)$_REQUEST['id'];
+		if (entry::isexist($id)) {
+			$entry = new entry;
+			$entry->load($id);
+			include '/template/entry.php';
+		} else {
+			include '/template/404.php';
+		}
 } else {
 	include '/template/index.php';
 }
