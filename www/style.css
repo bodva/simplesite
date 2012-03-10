@@ -1,0 +1,39 @@
+div {
+	/*border: 1px solid #000;*/
+}
+.header a{
+	text-decoration: none;
+	color: red;
+}
+.page {
+	width:100%;
+}
+.cnt {
+	width:60%;
+	position: absolute;	
+	margin-left: 20%;
+}
+.login{
+	text-align:center;
+}
+.sidebar{
+	position: relative;
+	margin-left: 81%;
+}
+.header {
+	text-align:left;
+}
+.body {
+	text-align:left;
+}
+
+.single-post{
+
+}
+.separator{
+	margin-top:20px;
+}
+
+.footer {
+	text-align: left;
+}
