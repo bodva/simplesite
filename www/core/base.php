@@ -3,7 +3,7 @@ if (!defined('defSimpleSite')) {die("Use site core!");}
 
 $kbase = new kconfig();
 
-include('debug.php');
+include('core.php');
 
 include('db.php');
 kdb::connect();
