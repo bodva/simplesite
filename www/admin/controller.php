@@ -1,6 +1,6 @@
 <?php if (!defined('defSimpleSite')) {die("Use site core!");}  ?>
 <?php
-error_reporting(0);
+// error_reporting(0);
 core::debug($_REQUEST);
 if ($user->islogin()) {
 	$adminmenu = array();

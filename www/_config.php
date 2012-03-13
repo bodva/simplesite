@@ -14,6 +14,7 @@ class kconfig{
 	static $dbbase = 'simplesite';
 	
 	static $usedebug = false;
+	static $showerrors = true;
 
 	static $author = "BoDVa";
 }

@@ -13,14 +13,17 @@ class about {
 		if ($saveid != -1) { $savepc->load($saveid);}
 
 //		if (!empty($_REQUEST['title'])) {
-			$savepc->title = htmlspecialchars($_REQUEST['title']);
-			$savepc->sortorder = (int)$_REQUEST['sortorder'];
+			// $savepc->title = htmlspecialchars($_REQUEST['title']);
+			$savepc->sortorder = core::getrequest('sortorder',true,true);
+			$savepc->title = core::getrequest('title');
+			// die();
 //		} else {
 //			$savepc->title = time();
 			// $savepc->title = date("Y-m-d H:i:s:u");
 		//}
 		// $savepc->content = htmlspecialchars($_REQUEST['content']);
-		$savepc->content = $_REQUEST['content'];
+		// $savepc->content = $_REQUEST['content'];
+		$savepc->content = core::getcontent('content',false);
 //		$savepc->author = kconfig::$author;
 
 		if ($saveid != -1) {
