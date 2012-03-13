@@ -17,7 +17,8 @@ class about {
 //			$savepc->title = time();
 			// $savepc->title = date("Y-m-d H:i:s:u");
 		//}
-		$savepc->content = htmlspecialchars($_REQUEST['content']);
+		// $savepc->content = htmlspecialchars($_REQUEST['content']);
+		$savepc->content = $_REQUEST['content'];
 //		$savepc->author = kconfig::$author;
 
 		if ($saveid != -1) {
@@ -149,7 +150,7 @@ class about {
 
 	}
 
-	function delete(){
+	function delete($id){
 		$kd = new kdb;
 		$kd->query("DELETE FROM `simple_about` WHERE `eid`='$id'");
 		unset($kd);
