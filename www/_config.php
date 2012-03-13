@@ -18,5 +18,5 @@ class kconfig{
 	static $author = "BoDVa";
 }
 
-include '/core/base.php';
+include './core/base.php';
 ?>

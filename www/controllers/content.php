@@ -6,20 +6,20 @@ if (!empty($_REQUEST['act'])) {
 	core::debug($act);
 	switch ($act) {
 		case 'admin':
-			include '/admin/index.php';
+			include './admin/index.php';
 			break;
 		case 'logout':
-			include '/admin/logout.php';
-			include '/template/index.php';
+			include './admin/logout.php';
+			include './template/index.php';
 			break;
 		case 'index':
-			include '/template/index.php';
+			include './template/index.php';
 			break;		
 		case 'about':
-			include '/template/about.php';
+			include './template/about.php';
 			break;		
 		default:
-			include '/template/index.php';
+			include './template/index.php';
 			break;
 	}
 } elseif (!empty($_REQUEST['id'])) {
@@ -27,11 +27,11 @@ if (!empty($_REQUEST['act'])) {
 		if (entry::isexist($id)) {
 			$entry = new entry;
 			$entry->load($id);
-			include '/template/entry.php';
+			include './template/entry.php';
 		} else {
-			include '/template/404.php';
+			include './template/404.php';
 		}
 } else {
-	include '/template/index.php';
+	include './template/index.php';
 }
 ?>

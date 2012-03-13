@@ -13,7 +13,7 @@ if ((!empty($_REQUEST['sent']))&&(!empty($_REQUEST['login']))&&(!empty($_REQUEST
 // core::debug ($user->islogin().'7'); 
 core::debug ($user); 
 if ($user->islogin()) {
-	include '/admin/controller.php' ;
+	include './admin/controller.php' ;
 } else {
  	?>
 	<div id="login" class="login">
