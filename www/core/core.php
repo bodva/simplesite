@@ -28,13 +28,10 @@ class core {
 	}
 
 	static function getrequest($name, $filter = true, $int = false){
-		// $result = array('error'=>false, 'code' => 0, 'request' => '');
 		$result = new request($name,$filter,$int);
 		if ($result->error){
 			core::error('error_numner:'.$result->ecode.'; '.$result->name.' '.self::$errors['request'][$result->ecode]);
 			die();
-			// core::debug();
-			// core::debug($r);
 		}
 		core::debug($result);
 		return $result;
@@ -50,29 +47,16 @@ class request {
 	var $filter = true;
 	var $int = false;
 
-/*	function request($name) {
-		if (empty($_REQUEST[$name])) {
-			$this->error = true;
-			$this->ecode = 1;
-		} elseif (is_array($_REQUEST['name'])) {
-			$this->error = true;
-			$this->ecode = 3;
-		} else {
-			$this->request = $_REQUEST[$name];
-		}
-	}*/
-
 	function request($name, $filter, $int) {
 		$this->name = $name;
+		$this->filter = $filter;
+		$this->int = $int;
+		
 		if (empty($_REQUEST[$this->name])) {
-			$this->error = true;
-			$this->ecode = 1;
+			$this->seterror(1);
 		} elseif (is_array($_REQUEST[$this->name])) {
-			$this->error = true;
-			$this->ecode = 3;
+			$this->seterror(3);
 		} else {
-			$this->filter = $filter;
-			$this->int = $int;
 			if ($this->filter) {
 				$this->request = htmlspecialchars($_REQUEST[$this->name]);
 			} else {
@@ -82,13 +66,17 @@ class request {
 				if (is_numeric($this->request)){
 					$this->request = (int)$this->request;
 				} else {
-					$this->error = true;
-					$this->ecode = 4;
-					$this->request = '';
+					$this->seterror(4);
 				}
 			}
 			
 		}
+	}
+
+	function seterror ($code) {
+		$this->error = true;
+		$this->ecode = $code;
+		$this->request = '';
 	}
 
 }
