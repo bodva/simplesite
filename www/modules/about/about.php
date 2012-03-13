@@ -4,6 +4,7 @@ class about {
 	var $id;
 	var $title;
 	var $content;
+	var $sortorder;
 
 	static function save($saveid = -1){
 		// die($saveid);
@@ -13,6 +14,7 @@ class about {
 
 //		if (!empty($_REQUEST['title'])) {
 			$savepc->title = htmlspecialchars($_REQUEST['title']);
+			$savepc->sortorder = (int)$_REQUEST['sortorder'];
 //		} else {
 //			$savepc->title = time();
 			// $savepc->title = date("Y-m-d H:i:s:u");
@@ -58,7 +60,15 @@ class about {
 		$content.= 'ID:'.$this->id;
 		$content.= '<br / >';
 		$content.= '<input type="hidden" name="id" value="'.$this->id.'">';
+		$content.= 'sortorder:';
+		$content.= '<br / >';
+		$content.= '<input type="text" name="sortorder" value="'.$this->sortorder.'">';
+		$content.= '<br / >';
+		$content.= 'title:';
+		$content.= '<br / >';
 		$content.= '<input type="text" name="title" value="'.$this->title.'">';
+		$content.= '<br / >';
+		$content.= 'content:';
 		$content.= '<br / >';
 		$content.= '<textarea name="content" rows=8 cols=80>'.$this->content.'</textarea>';
 		$content.= '<br / >';
@@ -72,11 +82,13 @@ class about {
 		$kd->query("INSERT INTO `simple_about` (
 			`eid`,
 			`title`,
-			`content`
+			`content`,
+			`sortorder`
 		) VALUES (
 			NULL,
 			'$this->title',
-			'$this->content'
+			'$this->content',
+			'$this->sortorder'
 		)
 			");
 		$this->id = $kd->getlastkey();
@@ -89,7 +101,8 @@ class about {
 		$kd->query("UPDATE `simple_about`
 		SET
 			`title` = '$this->title',
-			`content` = '$this->content'
+			`content` = '$this->content',
+			`sortorder` = '$this->sortorder'
 		WHERE
 			`eid` = '$this->id'
 		");
@@ -111,13 +124,15 @@ class about {
 		$kd->query("SELECT 
 			`eid`,
 			`title`,
-			`content`
+			`content`,
+			`sortorder`
 			FROM `simple_about`
 				WHERE `eid`='$id'");
 		if ($u0 = $kd->read()){
 			$this->id = $u0[0];
 			$this->title = $u0[1];
 			$this->content = $u0[2];
+			$this->sortorder = $u0[3];
 			// $this->author = $u0[3];
 		}
 	}
@@ -127,9 +142,10 @@ class about {
 		$sql = "SELECT 
 						n0.eid,
 						n0.title,
-						n0.content
+						n0.content,
+						n0.sortorder
 					FROM `simple_about` as n0
-					ORDER BY n0.eid DESC";
+					ORDER BY n0.sortorder,n0.eid ASC";
 		if (($page > 0)&&($col>0)) {
 			$start = $col*($page-1);
 			$end = $col*$page;
@@ -142,6 +158,7 @@ class about {
 			$entry->id = $u0[0];
 			$entry->title = $u0[1];
 			$entry->content = $u0[2];
+			$entry->sortorder = $u0[3];
 			// $entry->author = $u0[3];
 			$objs[] = $entry;
 		}
