@@ -23,7 +23,7 @@ class about {
 		//}
 		// $savepc->content = htmlspecialchars($_REQUEST['content']);
 		// $savepc->content = $_REQUEST['content'];
-		$savepc->content = core::getcontent('content',false);
+		$savepc->content = core::getrequest('content',false);
 //		$savepc->author = kconfig::$author;
 
 		if ($saveid != -1) {

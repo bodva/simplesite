@@ -21,7 +21,7 @@ class core {
 
 	static function error($text) {
 		if (kconfig::$showerrors) {
-			print_r('<div style="font-color:red;"><pre>');
+			print_r('<div style="color:red;"><pre>');
 			print_r($text);
 			print_r('</pre></div>');
 		}
