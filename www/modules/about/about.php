@@ -14,8 +14,8 @@ class about {
 
 //		if (!empty($_REQUEST['title'])) {
 			// $savepc->title = htmlspecialchars($_REQUEST['title']);
-			$savepc->sortorder = core::getrequest('sortorder',true,true);
-			$savepc->title = core::getrequest('title');
+			$savepc->sortorder = core::getrequest('sortorder',true,true)->request;
+			$savepc->title = core::getrequest('title')->request;
 			// die();
 //		} else {
 //			$savepc->title = time();
@@ -23,9 +23,12 @@ class about {
 		//}
 		// $savepc->content = htmlspecialchars($_REQUEST['content']);
 		// $savepc->content = $_REQUEST['content'];
-		$savepc->content = core::getrequest('content',false);
+		$savepc->content = core::getrequest('content',false)->request;
 //		$savepc->author = kconfig::$author;
-
+		if (core::$nicedie) {
+			// break;
+			return $saveid;
+		}
 		if ($saveid != -1) {
 			$savepc->update();
 		} else {
@@ -58,23 +61,29 @@ class about {
 	function adminentry($id=-1){
 		// $entry = new entry;
 		if ($id != -1 ) { $this->load($id);}
+		core::debug($_REQUEST);
 		$content = '';
 
+		core::debug($this);
+		$this->sortorder = (!empty($_REQUEST['sortorder']))?($_REQUEST['sortorder']):($this->sortorder);
+		$this->title = (!empty($_REQUEST['title']))?($_REQUEST['title']):($this->title);
+		$this->content = (!empty($_REQUEST['content']))?($_REQUEST['content']):($this->content);
+		// if (!empty($_REQUEST['sortorder'])) {}
 		$content.= 'ID:'.$this->id;
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= '<input type="hidden" name="id" value="'.$this->id.'">';
 		$content.= 'sortorder:';
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= '<input type="text" name="sortorder" value="'.$this->sortorder.'">';
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= 'title:';
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= '<input type="text" name="title" value="'.$this->title.'">';
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= 'content:';
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= '<textarea name="content" rows=8 cols=80>'.$this->content.'</textarea>';
-		$content.= '<br / >';
+		$content.= '<br />';
 		$content.= '<input type="submit" name="save">';
 
 		return $content;
@@ -101,6 +110,7 @@ class about {
 
 	function update () {
 		$kd = new kdb;
+		core::debug($this);
 		$kd->query("UPDATE `simple_about`
 		SET
 			`title` = '$this->title',

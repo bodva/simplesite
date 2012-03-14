@@ -2,12 +2,13 @@
 class core {
 	static $errors = array(
 		'request' => array (
-			'1' => 'con not be empty',
+			'1' => 'can not be empty',
 			'2' => 'must be valid',
 			'3' => 'can not be an array',
 			'4' => 'must be numeric'
 			)
 		);
+	static $nicedie = false;
 
 	static function debug($varible) {
 		global $kbase;
@@ -31,7 +32,8 @@ class core {
 		$result = new request($name,$filter,$int);
 		if ($result->error){
 			core::error('error_numner:'.$result->ecode.'; '.$result->name.' '.self::$errors['request'][$result->ecode]);
-			die();
+			// die();
+			self::$nicedie = true;
 		}
 		core::debug($result);
 		return $result;

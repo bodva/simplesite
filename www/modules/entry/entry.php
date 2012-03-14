@@ -13,16 +13,21 @@ class entry {
 		if ($saveid != -1) { $savepc->load($saveid);}
 
 		if (!empty($_REQUEST['title'])) {
-			$savepc->title = htmlspecialchars($_REQUEST['title']);
+			// $savepc->title = htmlspecialchars($_REQUEST['title']);
+			$savepc->title = core::getrequest('title')->request;
 		} else {
 			$savepc->title = time();
 			// $savepc->title = date("Y-m-d H:i:s:u");
 		}
 		// $savepc->content = htmlspecialchars($_REQUEST['content']);
-		$savepc->content = $_REQUEST['content'];
+		// $savepc->content = $_REQUEST['content'];
+		$savepc->content = core::getrequest('content',false)->request;
 
 		$savepc->author = kconfig::$author;
-
+		
+		if (core::$nicedie) {
+			return $saveid;
+		}
 		if ($saveid != -1) {
 			$savepc->update();
 		} else {
@@ -57,6 +62,9 @@ class entry {
 		if ($id != -1 ) { $this->load($id);}
 		$content = '';
 
+		$this->title = (!empty($_REQUEST['title']))?($_REQUEST['title']):($this->title);
+		$this->content = (!empty($_REQUEST['content']))?($_REQUEST['content']):($this->content);
+		
 		$content.= 'ID:'.$this->id;
 		$content.= '<br / >';
 		$content.= '<input type="hidden" name="id" value="'.$this->id.'">';
