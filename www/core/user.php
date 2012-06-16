@@ -37,7 +37,7 @@ private $admin = false;
 		$kd = new kdb;
 		//echo $user.'<br>';
 		//if (kconfig::$dbtype == 'mysql'){
-			$kd->query("SELECT `userid`,`login`,`pswd`, `isadmin` FROM `simple_users` WHERE `login`='".$user."'");
+			$kd->query("SELECT `userid`,`login`,`pswd`, `isadmin` FROM `simple_users` WHERE LOWER(`login`)='".mb_strtolower($user,'utf8')."'");
 		//} elseif (kconfig::$dbtype == 'pgsql') {
 		//	$kd->query("SELECT \"userid\", \"user\", \"passwd\", \"isadmin\", \"issaler\" FROM k_users WHERE \"user\"='".$user."'");
 		//}
