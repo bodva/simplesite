@@ -20,7 +20,8 @@ private $admin = false;
 	
 	private function load($uid){
 		$kd = new kdb;
-		$kd->query("SELECT `userid`,`login`, `isadmin` FROM `simple_users` WHERE `userid`='".mysql_real_escape_string($uid)."'");
+		$uid = (int)$uid;
+		$kd->query("SELECT `userid`,`login`, `isadmin` FROM `simple_users` WHERE `userid`='".$uid."'");
 		while ($u0 = $kd->read()) {
 			$this->userid = $u0[0];
 			$this->user = $u0[1];
