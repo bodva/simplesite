@@ -98,9 +98,9 @@ class about {
 			`sortorder`
 		) VALUES (
 			NULL,
-			'$this->title',
-			'$this->content',
-			'$this->sortorder'
+			'".mysql_real_escape_string($this->title)."',
+			'".mysql_real_escape_string($this->content)."',
+			'".mysql_real_escape_string($this->sortorder)."'
 		)
 			");
 		$this->id = $kd->getlastkey();
@@ -113,16 +113,17 @@ class about {
 		core::debug($this);
 		$kd->query("UPDATE `simple_about`
 		SET
-			`title` = '$this->title',
-			`content` = '$this->content',
-			`sortorder` = '$this->sortorder'
+			`title` = '".mysql_real_escape_string($this->title)."',
+			`content` = '".mysql_real_escape_string($this->content)."',
+			`sortorder` = '".mysql_real_escape_string($this->sortorder)."'
 		WHERE
-			`eid` = '$this->id'
+			`eid` = '".intval($this->id)."'
 		");
 		unset($kd);
 	}
 
 	static function isexist($id){
+		$id = intval($id);
 		$result = false;
 		$kd = new kdb;
 		$kd->query("SELECT `eid` FROM `simple_about` WHERE `eid`='$id'");
@@ -133,6 +134,7 @@ class about {
 	}
 
 	function load ($id) {
+		$id = intval($id);
 		$kd = new kdb;
 		$kd->query("SELECT 
 			`eid`,
@@ -181,6 +183,7 @@ class about {
 	}
 
 	function delete($id){
+		$id = intval($id);
 		$kd = new kdb;
 		$kd->query("DELETE FROM `simple_about` WHERE `eid`='$id'");
 		unset($kd);

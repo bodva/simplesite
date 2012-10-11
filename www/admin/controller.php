@@ -32,7 +32,10 @@ if ($user->islogin()) {
 	<?php
 	} else {
 		core::debug($_REQUEST['mod']);
-		$mod = $_REQUEST['mod'];
+		$mod = htmlspecialchars($_REQUEST['mod']);
+		if (!class_exists($mod)) {
+			die('invalid module');
+		}
 		if (empty($_GET['id'])){
 			$obj = new $mod;
 			if (!empty($_REQUEST['del'])) {
@@ -59,7 +62,7 @@ if ($user->islogin()) {
 			?>
 			<div><a href="?act=admin&mod=<?php echo $mod; ?>">Back to the module menu</a></div>
 			<?php
-			$eid = $_GET['id'];
+			$eid = intval($_GET['id']);
 
 			if (!empty($_REQUEST['save'])) { $eid = $mod::save($eid);}
 

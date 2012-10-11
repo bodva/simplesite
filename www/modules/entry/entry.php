@@ -86,9 +86,9 @@ class entry {
 			`author`
 		) VALUES (
 			NULL,
-			'$this->title',
-			'$this->content',
-			'$this->author'
+			'".mysql_real_escape_string($this->title)."',
+			'".mysql_real_escape_string($this->content)."',
+			'".mysql_real_escape_string($this->author)."'
 		)
 			");
 		$this->id = $kd->getlastkey();
@@ -100,16 +100,17 @@ class entry {
 		$kd = new kdb;
 		$kd->query("UPDATE `simple_entry`
 		SET
-			`title` = '$this->title',
-			`content` = '$this->content',
-			`author` = '$this->author'
+			`title` = '".mysql_real_escape_string($this->title)."',
+			`content` = '".mysql_real_escape_string($this->content)."',
+			`author` = '".mysql_real_escape_string($this->author)."'
 		WHERE
-			`eid` = '$this->id'
+			`eid` = '".intval($this->id)."'
 		");
 		unset($kd);
 	}
 
 	static function isexist($id){
+		$id = intval($id);
 		$result = false;
 		$kd = new kdb;
 		$kd->query("SELECT `eid` FROM `simple_entry` WHERE `eid`='$id'");
@@ -120,6 +121,7 @@ class entry {
 	}
 
 	function load ($id) {
+		$id = intval($id);
 		$kd = new kdb;
 		$kd->query("SELECT 
 			`eid`,
@@ -166,6 +168,7 @@ class entry {
 	}
 
 	function delete($id){
+		$id = intval($id);
 		$kd = new kdb;
 		$kd->query("DELETE FROM `simple_entry` WHERE `eid`='$id'");
 		unset($kd);

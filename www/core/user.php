@@ -20,7 +20,7 @@ private $admin = false;
 	
 	private function load($uid){
 		$kd = new kdb;
-		$kd->query("SELECT `userid`,`login`, `isadmin` FROM `simple_users` WHERE `userid`='".$uid."'");
+		$kd->query("SELECT `userid`,`login`, `isadmin` FROM `simple_users` WHERE `userid`='".mysql_real_escape_string($uid)."'");
 		while ($u0 = $kd->read()) {
 			$this->userid = $u0[0];
 			$this->user = $u0[1];
@@ -37,7 +37,7 @@ private $admin = false;
 		$kd = new kdb;
 		//echo $user.'<br>';
 		//if (kconfig::$dbtype == 'mysql'){
-			$kd->query("SELECT `userid`,`login`,`pswd`, `isadmin` FROM `simple_users` WHERE LOWER(`login`)='".mb_strtolower($user,'utf8')."'");
+			$kd->query("SELECT `userid`,`login`,`pswd`, `isadmin` FROM `simple_users` WHERE LOWER(`login`)='".mysql_real_escape_string(mb_strtolower($user,'utf8'))."'");
 		//} elseif (kconfig::$dbtype == 'pgsql') {
 		//	$kd->query("SELECT \"userid\", \"user\", \"passwd\", \"isadmin\", \"issaler\" FROM k_users WHERE \"user\"='".$user."'");
 		//}
