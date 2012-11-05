@@ -3,10 +3,10 @@
 
 <html>
 <head>
-	<title>BoDVa</title>
+	<title>Dmitry Boyko | BoDVa</title>
 	<link  href="./style.css" type="text/css" rel="Stylesheet" />
-    <script src="./jquery/jquery.js" type="text/javascript"></script>
-    <script src="./jquery/jquery-ui.js" type="text/javascript"></script>
+    <!-- <script src="./jquery/jquery.js" type="text/javascript"></script> 
+    <script src="./jquery/jquery-ui.js" type="text/javascript"></script> -->
     <script src="./script.js" type="text/javascript"></script>
 </head>
 <body>
